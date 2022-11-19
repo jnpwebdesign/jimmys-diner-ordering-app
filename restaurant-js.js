@@ -38,21 +38,57 @@ function addItemToOrder(item) {
     renderMyOrder();  
 }
 
+
 function renderMyOrder() {
     console.log(menuArray);
+}
+/*
+    menuArray.forEach(function(food){
+            console.log(document.getElementById("order-items-container"))
+    })
+               
+    <p id="order-item-text" class="order-item-text">${food.name} 
+                    <span class="remove">remove</span>
+                </p>
+                <p class="order-item-text align-right">${food.myOrderCount * food.price}</p>
+
+            `   
+            });
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+    document.getElementById("your-order-container").innerHTML = `
+        <h4>Your Order</h4>       
+        <div id="order-items">
+            <div class="order-items-container">
+                <p class="order-item-text total-price">Total price:</p>
+                <p id="total-price" class="order-item-text align-right total-price">$12</p>
+            </div>
+            <div class="complete-order-container">
+            <button id="complete-order-btn" class="btn"data-complete="total-price">Complete order</button>
+            </div> 
+            <div id="thank-you-container">
+                <p id="thank-you-message">Thanks, James! Your order is on its way!</p>
+            </div>
+        </div>
+        `    
     
 }
 
 
-function addPizzaToOrder() {
-    pizzaCount++;
-    pizzaCost += 14;
-    if (pizzaCount === 1) {
-        emptyCartText.style.display="none";
-        document.getElementById("order-pizza-text").innerHTML = `Pizza <button class="remove">remove</button>`;
 
-    } 
-    pizzaDisplayedPrice.innerHTML = `$${pizzaCost}`; 
 
 //     orderItemsAndTotal.innerHTML = `
 //     <div class="order-items-container">
@@ -62,8 +98,7 @@ function addPizzaToOrder() {
 //     <p class="order-item-text align-right">$12</p>
 // </div>`
 
-    console.log(pizzaCount);
-}
+*/
 
 
 function getMenuItems() {
