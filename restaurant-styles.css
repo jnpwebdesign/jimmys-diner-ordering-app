@@ -7,7 +7,6 @@ html, body {
 /* containers */
 .menu {
     width: 600px;
-
     margin: 20px auto;
     font-family: 'Smythe', cursive;
     font-weight: 400;
@@ -172,16 +171,27 @@ h4 {
     font-weight: 400;
 }
 
-.remove {
-    color: #BBBBBB;
-    font-size: 12px;
-    line-height: 24px;
-}
-
 .modal-title {
     font-size: 24px;
 }
-/* buttons & inputs */
+
+#empty-cart-text {
+    line-height: 28px;
+    display: block;
+    text-align: center;
+}
+
+
+/* buttons & inputs & emojis */
+
+.emoji {
+    font-size: 100px;
+    margin: -20px 15px 0 -20px;
+    padding: 0;
+}
+button {
+    cursor: pointer
+}
 
 .increment-btn {   
     color: #3C3C3C;
@@ -215,6 +225,7 @@ h4 {
     margin: 40px auto 50px auto; 
     padding: 0;
 }
+
 #pay-btn {
     width: 476px;
     height: 71px;
@@ -231,10 +242,19 @@ h4 {
     padding: 0;
 }
 
-.btn {
-    cursor: pointer;
-}
-
 .hidden {
     display: none;
+}
+
+.remove {
+    color: #BBBBBB;
+    font-size: 12px;
+    line-height: 24px;
+    border: none;
+    background-color: white;
+    margin: 0;
+    padding-left: 4px;
+    font-family: 'Smythe', cursive;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+
 }
