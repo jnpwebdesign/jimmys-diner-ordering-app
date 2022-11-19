@@ -28,24 +28,11 @@ function addItemToOrder(item) {
             totalItemPrice = food.price * itemCount;
             console.log(`price: ${totalItemPrice}, count: ${itemCount}`)
         }
-    }  
-
-}
-
-function handleLikeClick (tweetID){
-    for (let tweet of tweetsData) {
-        if (tweet.uuid === tweetID) {
-            const targetTweetObj = tweet;                   //alternative method to what was used in handleRetweetClick
-            if (!targetTweetObj.isLiked) {
-                targetTweetObj.likes++;
-            } else if (targetTweetObj.isLiked) {
-                targetTweetObj.likes--;
-            }
-            targetTweetObj.isLiked = !targetTweetObj.isLiked;   
-        } 
     }
-    renderTweets();
+    renderOrder();  
 }
+
+
 
 function addPizzaToOrder() {
     pizzaCount++;
