@@ -8,8 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Smythe&display=swap" rel="stylesheet">
-<!-- font awesome -->    
-    <script src="https://kit.fontawesome.com/7d06af126b.js" crossorigin="anonymous"></script>
 <!-- link to css-->    
     <link rel="stylesheet" href="restaurant-styles.css">
 
@@ -55,16 +53,36 @@
                     </div>
                     <button class="increment-btn align-right" id="increment-beer-button">+</button>   
                 </div>
-                <div class="hidden thank-you-container">
-                    <p class="thank-you-message">Thanks, James! Your order is on its way!</p>
+                <div id="thank-you-container">
+                    <p id="thank-you-message">Thanks, James! Your order is on its way!</p>
                 </div>
             </section>
-            <section id="modal-container" class="">
-                <h5 class="modal-title">Enter card details</h5>
-                <input type="text" class="input" placeholder="Enter your name">
-                <input type="number" class="input" placeholder="Enter card number">
-                <input type="number" class="input" placeholder="Enter CVV">
-                <button id="pay-btn">Pay</button>
+            <section>
+                <form id="modal-form" name="modal" class="hidden">
+                    <h5 class="modal-title">Enter card details</h5>
+                    <input required
+                        id="name-input" 
+                        type="text" 
+                        class="input" 
+                        placeholder="Enter your name"
+                        aria-label="Your name"
+                        name="name-input">
+                    <input required
+                        id="card-number-input" 
+                        type="number" 
+                        class="input" 
+                        placeholder="Enter card number"
+                        aria-label="Your credit card number"
+                        name="card-number-input">
+                    <input required
+                        id="cvv-input" 
+                        type="number" 
+                        class="input" 
+                        placeholder="Enter CVV"
+                        aria-label="CVV"
+                        name="cvv-input">
+                    <button id="pay-btn" class="btn" type="submit">Pay</button>
+                </form>
             </section>
 
         </main>
@@ -84,7 +102,7 @@
                     <p id="total-price" class="order-item-text align-right total-price">$12</p>
                 </div>
                 <div class="complete-order-container">
-                   <button id="complete-order-btn">Complete order</button>
+                   <button id="complete-order-btn" class="btn">Complete order</button>
                 </div>
             </div>
 
