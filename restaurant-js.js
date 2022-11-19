@@ -8,6 +8,12 @@ let itemCount = 0;
 let totalItemPrice = 0;
 console.log(itemCount, totalItemPrice);
 
+menuArray.forEach(function(food){
+    food.myOrderCount = 0;                  //creates myOrderCount = 0 in each food object in the array menuArray
+})
+console.log(menuArray[0]);
+
+
 document.addEventListener("click", function(e) {
         if(e.target.dataset.add) {
             addItemToOrder(e.target.dataset.add);
@@ -22,16 +28,20 @@ let pizzaDisplayedPrice = document.getElementById("pizza-cost");
 
 
 function addItemToOrder(item) {
+    console.log(item);
     for (let food of menuArray) {
         if (food.name === item) {
-            itemCount++;
-            totalItemPrice = food.price * itemCount;
-            console.log(`price: ${totalItemPrice}, count: ${itemCount}`)
+            food.myOrderCount++;
+            console.log(food.myOrderCount);  
         }
     }
-    renderOrder();  
+    renderMyOrder();  
 }
 
+function renderMyOrder() {
+    console.log(menuArray);
+    
+}
 
 
 function addPizzaToOrder() {
@@ -54,16 +64,6 @@ function addPizzaToOrder() {
 
     console.log(pizzaCount);
 }
-
-
-
-
-
-
-
-
-
-
 
 
 function getMenuItems() {
