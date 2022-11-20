@@ -6,100 +6,81 @@ const beerBtn = document.getElementById("increment-beer-btn");
 const modalForm = document.getElementById("modal-form");
 let itemCount = 0;
 let totalItemPrice = 0;
-console.log(itemCount, totalItemPrice);
 
 menuArray.forEach(function(food){
     food.myOrderCount = 0;                  //creates myOrderCount = 0 in each food object in the array menuArray
 })
-console.log(menuArray[0]);
-
 
 document.addEventListener("click", function(e) {
         if(e.target.dataset.add) {
             addItemToOrder(e.target.dataset.add);
-            console.log(e.target.dataset.add)
         } else if (e.target.id == "complete-order-btn") {
          console.log(e.target.id);
+        modalForm.style.display="flex";                      
      }   
+
 })
 
 let emptyCartText = document.getElementById("empty-cart-text");
 let pizzaDisplayedPrice = document.getElementById("pizza-cost");
 
-
 function addItemToOrder(item) {
-    console.log(item);
     for (let food of menuArray) {
         if (food.name === item) {
             food.myOrderCount++;
-            console.log(food.myOrderCount);  
         }
     }
-    renderMyOrder();  
+    renderYourOrder();  
 }
 
-
-function renderMyOrder() {
-    console.log(menuArray);
-}
-/*
+function renderYourOrder() {
+    let yourOrderFeed = "";
     menuArray.forEach(function(food){
-            console.log(document.getElementById("order-items-container"))
-    })
-               
-    <p id="order-item-text" class="order-item-text">${food.name} 
-                    <span class="remove">remove</span>
-                </p>
-                <p class="order-item-text align-right">${food.myOrderCount * food.price}</p>
+        if (food.myOrderCount > 0) {
+            yourOrderFeed += `
+            <div class="item-info">
+            <p id="order-item-text" class="order-item-text">${food.name} 
+                <span class="remove">remove</span>
+            </p>
+            <p class="order-item-text align-right">
+                $${food.myOrderCount * food.price}
+            </p>`
+        }    
+    });  
+    printYourOrder(yourOrderFeed); 
+}
 
-            `   
-            });
-
-
-        
-
-
-
-
+let totalOrderPrice = 0;
 
 
+function printYourOrder(yourOrderFeed) {
+    menuArray.forEach(function(food) {
+        food.totalItemPrice = food.price * food.myOrderCount;
+        console.log(`${food.name}: ${food.totalItemPrice}`);
+    });
 
 
-
-
+    
 
 
     document.getElementById("your-order-container").innerHTML = `
-        <h4>Your Order</h4>       
+        <h4>Your Order</h4>
+        <div id="order-items-container">
+            ${yourOrderFeed}
+        </div>
         <div id="order-items">
             <div class="order-items-container">
                 <p class="order-item-text total-price">Total price:</p>
-                <p id="total-price" class="order-item-text align-right total-price">$12</p>
+                <p id="total-price" class="order-item-text align-right total-price">
+                
+                ${totalOrderPrice}</p>
             </div>
             <div class="complete-order-container">
             <button id="complete-order-btn" class="btn"data-complete="total-price">Complete order</button>
             </div> 
-            <div id="thank-you-container">
-                <p id="thank-you-message">Thanks, James! Your order is on its way!</p>
-            </div>
-        </div>
-        `    
-    
-}
-
-
-
-
-//     orderItemsAndTotal.innerHTML = `
-//     <div class="order-items-container">
-//         <p id="order-item-text" class="order-item-text">Pizzaplaceholder 
-//             <span class="remove">remove</span>
-//         </p>
-//     <p class="order-item-text align-right">$12</p>
-// </div>`
-
-*/
-
+        </div>                          
+    `
+}  
 
 function getMenuItems() {
     let menuFeed = "";
@@ -119,20 +100,10 @@ function getMenuItems() {
     return menuFeed;
 }
 
-
 function renderMenu() {
     document.getElementById("menu-container").innerHTML = getMenuItems();
-
 }
 renderMenu();
-
-
-
-
-
-
-
-//modalForm.style.display="flex";                               //displays credit card pop-up
 
 modalForm.addEventListener("submit", function(e){
     e.preventDefault();
@@ -143,27 +114,15 @@ modalForm.addEventListener("submit", function(e){
     const cvv = customerPaymentInfo.get("cvv-input");
     console.log(customerName, creditCardNumber, cvv, customerPaymentInfo);
     modalForm.style.display = "none";
-    displayThankYou();
-    return customerPaymentInfo;
+    displayThankYou(customerName);
+    
 
 })
 
-//function getCustomerPaymentInfo () {
-//  }
-
-function displayThankYou() {
-    document.getElementById("thank-you-container").style.display="flex";
-    document.getElementById("thank-you-message").style.display="flex";
+function displayThankYou(customerName) {
+    document.getElementById("your-order-container").innerHTML = `
+        <div id="thank-you-container">
+            <p id="thank-you-message">Thanks, ${customerName}! Your order is on its way!</p>
+        </div>
+    `
 }
-
-
-//order item container: 
-
-// <div class="order-items-container">
-//     <p 
-//         id="order-${food.name}-text" 
-//         class="order-item-text">${food.name}
-//         <button class="remove">remove<button>
-//     </p>
-//     <p class="order-${food.name}-text align-right" id="${food.name}-cost">$${food.price}</p>
-// </div> 
