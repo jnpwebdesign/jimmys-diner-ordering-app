@@ -18,7 +18,6 @@ document.addEventListener("click", function(e) {
             modalForm.style.display="flex";
             document.getElementById("totalLine").style.borderTop ="1px solid black";                     
         } else if (e.target.id == "remove") {
-            console.log(e.target.dataset.remove);
             removeItemFromOrder(e.target.dataset.remove);                          
         }      
 })
@@ -119,7 +118,6 @@ modalForm.addEventListener("submit", function(e){
     const customerName = customerPaymentInfo.get("name-input");
     const creditCardNumber = customerPaymentInfo.get("card-number-input");
     const cvv = customerPaymentInfo.get("cvv-input");
-    console.log(customerName, creditCardNumber, cvv, customerPaymentInfo);
     modalForm.style.display = "none";
     displayThankYou(customerName);
 })
