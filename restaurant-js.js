@@ -14,13 +14,13 @@ menuArray.forEach(function(food){
 document.addEventListener("click", function(e) {
         if(e.target.dataset.add) {
             addItemToOrder(e.target.dataset.add);
-        } else if (e.target.id == "complete-order-btn") {
-            modalForm.style.display="flex";                      
+        } else if (e.target.id == "complete-order-btn" && totalOrderPrice != 0) {
+            modalForm.style.display="flex";
+            document.getElementById("totalLine").style.borderTop ="1px solid black";                     
         } else if (e.target.id == "remove") {
             console.log(e.target.dataset.remove);
             removeItemFromOrder(e.target.dataset.remove);                          
         }      
-
 })
 
 let emptyCartText = document.getElementById("empty-cart-text");
@@ -51,18 +51,18 @@ function renderYourOrder() {
         if (food.myOrderCount > 0) {
             yourOrderFeed += `
             <div class="item-info">
-            <p id="order-item-text" class="order-item-text">${food.name} 
+                <p id="order-item-text" class="order-item-text">${food.name}     
+                </p>
                 <button class="remove" id="remove" data-remove="${food.name}">remove</button>
-            </p>
-            <p class="order-item-text align-right">
+                <p class="order-item-text align-right">
                 $${food.myOrderCount * food.price}
-            </p>`
+                </p>
+            </div>
+            `
         }    
     });  
     printYourOrder(yourOrderFeed); 
 }
-
-
 
 function printYourOrder(yourOrderFeed) {
     menuArray.forEach(function(food) {
@@ -72,14 +72,13 @@ function printYourOrder(yourOrderFeed) {
 
     document.getElementById("your-order-container").innerHTML = `
         <h4>Your Order</h4>
-        <div id="order-items-container">
+        <div id="item-info">
             ${yourOrderFeed}
         </div>
         <div id="order-items">
-            <div class="order-items-container">
+            <div id="totalLine" class="order-items-container">
                 <p class="order-item-text total-price">Total price:</p>
                 <p id="total-price" class="order-item-text align-right total-price">
-                
                 $${totalOrderPrice}</p>
             </div>
             <div class="complete-order-container">
@@ -110,6 +109,7 @@ function getMenuItems() {
 function renderMenu() {
     document.getElementById("menu-container").innerHTML = getMenuItems();
 }
+
 renderMenu();
 
 modalForm.addEventListener("submit", function(e){
@@ -122,8 +122,6 @@ modalForm.addEventListener("submit", function(e){
     console.log(customerName, creditCardNumber, cvv, customerPaymentInfo);
     modalForm.style.display = "none";
     displayThankYou(customerName);
-    
-
 })
 
 function displayThankYou(customerName) {
