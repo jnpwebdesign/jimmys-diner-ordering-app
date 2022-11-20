@@ -15,9 +15,11 @@ document.addEventListener("click", function(e) {
         if(e.target.dataset.add) {
             addItemToOrder(e.target.dataset.add);
         } else if (e.target.id == "complete-order-btn") {
-         console.log(e.target.id);
-        modalForm.style.display="flex";                      
-     }   
+            modalForm.style.display="flex";                      
+        } else if (e.target.id == "remove") {
+            console.log(e.target.dataset.remove);
+            removeItemFromOrder(e.target.dataset.remove);                          
+        }      
 
 })
 
@@ -33,14 +35,24 @@ function addItemToOrder(item) {
     renderYourOrder();  
 }
 
+function removeItemFromOrder(item) {
+    for (let food of menuArray) {
+        if (food.name === item) {
+            food.myOrderCount = 0;
+        }
+    }
+    renderYourOrder();  
+}
+let totalOrderPrice = 0;
 function renderYourOrder() {
     let yourOrderFeed = "";
+    totalOrderPrice = 0;
     menuArray.forEach(function(food){
         if (food.myOrderCount > 0) {
             yourOrderFeed += `
             <div class="item-info">
             <p id="order-item-text" class="order-item-text">${food.name} 
-                <span class="remove">remove</span>
+                <button class="remove" id="remove" data-remove="${food.name}">remove</button>
             </p>
             <p class="order-item-text align-right">
                 $${food.myOrderCount * food.price}
@@ -50,18 +62,13 @@ function renderYourOrder() {
     printYourOrder(yourOrderFeed); 
 }
 
-let totalOrderPrice = 0;
 
 
 function printYourOrder(yourOrderFeed) {
     menuArray.forEach(function(food) {
         food.totalItemPrice = food.price * food.myOrderCount;
-        console.log(`${food.name}: ${food.totalItemPrice}`);
-    });
-
-
-    
-
+        totalOrderPrice += food.totalItemPrice;
+    });  
 
     document.getElementById("your-order-container").innerHTML = `
         <h4>Your Order</h4>
@@ -73,7 +80,7 @@ function printYourOrder(yourOrderFeed) {
                 <p class="order-item-text total-price">Total price:</p>
                 <p id="total-price" class="order-item-text align-right total-price">
                 
-                ${totalOrderPrice}</p>
+                $${totalOrderPrice}</p>
             </div>
             <div class="complete-order-container">
             <button id="complete-order-btn" class="btn"data-complete="total-price">Complete order</button>
